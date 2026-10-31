@@ -4,12 +4,24 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\AuthController;
 
-// Auth routes
+// ==========================================
+// AUTHENTICATION ROUTES (Đăng ký, Đăng nhập, Quên mật khẩu)
+// ==========================================
 Route::get('/register', [AuthController::class, 'showRegister'])->name('register');
 Route::post('/register', [AuthController::class, 'register']);
+
 Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+
+// Bổ sung Route Quên mật khẩu
+Route::get('/forgot_password', [AuthController::class, 'showForgotPassword'])->name('password.request');
+Route::post('/forgot_password', [AuthController::class, 'forgotPassword'])->name('password.email');
+
+
+// ==========================================
+// POST ROUTES (Quản lý bài viết)
+// ==========================================
 
 // Route danh sách bài viết (Công khai)
 Route::get('/post', [PostController::class, 'index'])->name('post.index');
@@ -25,3 +37,12 @@ Route::middleware(['auth'])->group(function () {
 
 // Route chi tiết bài viết (Đặt ở cuối vì có tham số động {id})
 Route::get('/post/{id}', [PostController::class, 'show'])->name('post.show');
+
+
+// ==========================================
+// TEST LOG ROUTE
+// ==========================================
+Route::get('/test-log', function () {
+    \Illuminate\Support\Facades\Log::info('Test ghi log theo ngay thành công!');
+    return 'Đã ghi log!';
+});

@@ -35,6 +35,11 @@
                         <input type="password" name="password" class="form-control" required>
                     </div>
 
+                    <!-- Đã thêm link Quên mật khẩu ở đây -->
+                    <div class="mb-3 text-end">
+                        <a href="{{ route('password.request') }}" class="text-decoration-none small">Quên mật khẩu?</a>
+                    </div>
+
                     <button type="submit" class="btn btn-primary w-100 mb-3">Đăng nhập</button>
                 </form>
 
